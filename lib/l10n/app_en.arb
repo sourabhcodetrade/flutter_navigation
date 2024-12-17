@@ -2,5 +2,10 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
-  }
+  },
+  "error": "Error",
+  "somethingWentWrong": "Something went wrong",
+  "pageNotFound": "Page not found",
+  "serverTimeout": "Server timeout",
+  "sessionExpired": "Session expired"
 }
