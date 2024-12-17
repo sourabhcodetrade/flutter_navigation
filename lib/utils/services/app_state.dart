@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_setup/utils/services/package_services.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../constants/app_config.dart';
 import '../constants/app_constants.dart';
+import '../manager/get_it_manager.dart';
+import '../manager/storage_manager.dart';
 
 final AppState appState = AppState();
 
@@ -156,7 +160,8 @@ final class AppState {
     final String password =
         await storageManager.getData(AppConstants.password) ?? '';
     try {
-      await FirebaseMessaging.instance.deleteToken();
+      //TODO: Uncomment this to use fcm token
+      // await FirebaseMessaging.instance.deleteToken();
     } catch (e) {
       debugPrint("Error found in FirebaseMessaging.instance.deleteToken => $e");
     }
@@ -184,7 +189,8 @@ final class AppState {
   Future<void> _setFCMToken() async {
     if (_fcmToken.isNotEmpty) return debugPrint("FCM Token already assigned.");
     try {
-      _fcmToken = (await FirebaseMessaging.instance.getToken() ?? '');
+      //TODO: Uncomment this to use fcm token
+      // _fcmToken = (await FirebaseMessaging.instance.getToken() ?? '');
       debugPrint("FCM Token is => $_fcmToken");
     } catch (e) {
       debugPrint("Error found in _setFCMToken => $e");
@@ -198,7 +204,8 @@ final class AppState {
       return debugPrint("APNS Token already assigned.");
     }
     try {
-      _apnsToken = (await FirebaseMessaging.instance.getAPNSToken() ?? "");
+      //TODO: Uncomment this to use fcm token
+      // _apnsToken = (await FirebaseMessaging.instance.getAPNSToken() ?? "");
       debugPrint("APNS Token is => $_apnsToken");
     } catch (e) {
       debugPrint("Error found in _setAPNSToken => $e");
@@ -227,7 +234,7 @@ final class AppState {
       return debugPrint("App Version is already assigned.");
     }
     try {
-      // _appVersion = (await PackageInfo.fromPlatform()).version;
+      _appVersion = (await PackageInfo.fromPlatform()).version;
       debugPrint("App Version is => $_appVersion");
     } catch (e) {
       debugPrint("Error found in _setPackageInfo => $e");
