@@ -1,11 +1,17 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  },
+  "appName": "Flutter setup",
   "error": "Error",
   "somethingWentWrong": "Something went wrong",
   "pageNotFound": "Page not found",
   "serverTimeout": "Server timeout",
-  "sessionExpired": "Session expired"
+  "sessionExpired": "Session expired",
+  "yes": "Yes",
+  "no": "No",
+  "joinCallMsg": "",
+  "audioCall": "",
+  "videoCall": "",
+  "allow": "Allow",
+  "openSettings": "Open settings",
+  "wantLeaveCall": "DO you want to leave?",
+  "ok": "Ok"
 }
