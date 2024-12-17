@@ -1,9 +1,35 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_setup/utils/app_config.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+}
+
+void mainDelegate() async {
+  runZonedGuarded<void>(() async {
+    HttpOverrides.global = MyHttpOverrides();
+    WidgetsFlutterBinding.ensureInitialized();
+    await DotEnv().load(fileName: ".env");
+
+    if (!AppConfig.instance.isFlavourInitialized) {
+      AppConfig.instance.setEnvironment(AppConfig.instance.currentEnv);
+    }
+    runApp(const MyApp());
+  }, (error, stack) {});
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) =>
+      super.createHttpClient(context)
+        ..badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
 }
 
 class MyApp extends StatelessWidget {

@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    // TODO: Add your own namespace.
     namespace = "com.example.flutter_setup"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -37,6 +38,38 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    flavorDimensions "flavor-type"
+
+    // TODO: Add your own app name for the builds.
+    productFlavors {
+        local {
+            dimension "flavor-type"
+            applicationIdSuffix ".local"
+            resValue "string", "app_name", "Flutter Setup local"
+        }
+        dev {
+            dimension "flavor-type"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Flutter Setup Dev"
+        }
+        stage {
+            dimension "flavor-type"
+            applicationIdSuffix ".stage"
+            resValue "string", "app_name", "Flutter Setup Stage"
+        }
+        preproduction {
+            dimension "flavor-type"
+            applicationIdSuffix ".preproduction"
+            resValue "string", "app_name", "Flutter Setup Preprod"
+        }
+        prod {
+            dimension "flavor-type"
+            resValue "string", "app_name", "Flutter Setup"
+        }
+    }
+
+
 }
 
 flutter {

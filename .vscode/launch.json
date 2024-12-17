@@ -1,0 +1,42 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+
+      {
+        "name": "Dev",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/core/flavor/dev/main.dart",
+        "args": ["--flavor", "dev"]
+      },
+      {
+        "name": "Local",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/core/flavor/local/main.dart",
+        "args": ["--flavor", "local"]
+      },
+      {
+        "name": "Stage",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/core/flavor/stage/main.dart",
+        "args": ["--flavor", "stage"]
+      },
+      {
+        "name": "PreProd",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/core/flavor/preprod/main.dart",
+        "args": ["--flavor", "preproduction"]
+      },
+      {
+        "name": "Prod",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/core/flavor/prod/main.dart",
+        "args": ["--flavor", "prod"]
+      },
+    ]
+  }
+  
