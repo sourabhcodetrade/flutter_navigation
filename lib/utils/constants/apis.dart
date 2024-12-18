@@ -15,5 +15,5 @@ class APIS {
   /// Production
   static const String baseUrlProd = '';
 
-  static const String logout = '';
+  final String logout = '';
 }

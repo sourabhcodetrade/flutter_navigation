@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 
 final class SVGElevatedButton extends StatelessWidget {
   final Widget child;
@@ -34,16 +35,15 @@ final class AppElevatedButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor, foregroundColor;
 
-  const AppElevatedButton(
+  AppElevatedButton(
     this.child, {
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
-    this.foregroundColor = ColorConstants.whiteColor,
     this.width = double.infinity,
     this.height = 40,
     this.borderRadius = 15,
-  });
+  })  : backgroundColor = getIt<ColorConstants>().primaryColor,
+        foregroundColor = getIt<ColorConstants>().whiteColor;
 
   @override
   ElevatedButton build(BuildContext context) => ElevatedButton(
@@ -69,16 +69,15 @@ final class AppElevatedIconButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor;
 
-  const AppElevatedIconButton({
+  AppElevatedIconButton({
     required this.child,
     required this.icon,
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
     this.width = 50,
     this.height = 35,
     this.borderRadius = 50,
-  });
+  }) : backgroundColor = getIt<ColorConstants>().primaryColor;
 
   @override
   ElevatedButton build(BuildContext context) => ElevatedButton.icon(
@@ -104,18 +103,17 @@ final class AppTextButton extends StatelessWidget {
   final Color backgroundColor, foregroundColor;
   final double horizontalPadding, verticalPadding;
 
-  const AppTextButton(
+  AppTextButton(
     this.child, {
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
-    this.foregroundColor = ColorConstants.whiteColor,
     this.width = double.infinity,
     this.height = 40,
     this.borderRadius = 15,
     this.horizontalPadding = 8,
     this.verticalPadding = 5,
-  });
+  })  : backgroundColor = getIt<ColorConstants>().primaryColor,
+        foregroundColor = getIt<ColorConstants>().whiteColor;
 
   @override
   TextButton build(BuildContext context) => TextButton(
@@ -143,19 +141,18 @@ final class AppTextIconButton extends StatelessWidget {
   final Color backgroundColor, foregroundColor;
   final double horizontalPadding, verticalPadding;
 
-  const AppTextIconButton(
+  AppTextIconButton(
     this.child, {
     required this.icon,
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
-    this.foregroundColor = ColorConstants.whiteColor,
     this.width = double.infinity,
     this.height = 40,
     this.borderRadius = 15,
     this.horizontalPadding = 8,
     this.verticalPadding = 5,
-  });
+  })  : backgroundColor = getIt<ColorConstants>().primaryColor,
+        foregroundColor = getIt<ColorConstants>().whiteColor;
 
   @override
   TextButton build(BuildContext context) => TextButton.icon(

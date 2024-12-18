@@ -57,7 +57,7 @@ final class CustomDialog {
     try {
       final Map<String, dynamic> param = {"params": {}};
       await getIt<APIController>()
-          .request(APIS.logout, APIMethod.post, param: param);
+          .request(getIt<APIS>().logout, APIMethod.post, param: param);
     } catch (e) {
       debugPrint("Error found in _showCustomDialog => $e");
     }
@@ -189,10 +189,10 @@ final class CustomDialog {
   }) =>
       AlertDialog.adaptive(
         content: Text(message, textAlign: TextAlign.center),
-        contentTextStyle: const TextStyle(
+        contentTextStyle: TextStyle(
           fontSize: 16,
           fontFamily: "HelveticaNeueLTArabic",
-          color: ColorConstants.blackColor,
+          color: getIt<ColorConstants>().blackColor,
         ),
         actions: _showDesignedMaterialActions(
           context,

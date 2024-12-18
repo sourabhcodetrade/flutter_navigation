@@ -124,7 +124,7 @@ final class APIController {
         return apiResponse = ApiResponseModel(response.data, null, true);
       }
       apiResponse = await _responseHandler(response,
-          shouldShowLogoutDialog: url != APIS.logout);
+          shouldShowLogoutDialog: url != getIt<APIS>().logout);
     } on DioException catch (e) {
       error = _handleError(e);
       apiResponse = ApiResponseModel(null, error, false);
@@ -196,8 +196,8 @@ final class APIController {
           'Cookie': appState.sessionId,
           'tz': appState.timeZone,
           'Accept-Language': appState.isArabic.value
-              ? AppConstants.localeAr
-              : AppConstants.localeEn,
+              ? getIt<AppConstants>().localeAr
+              : getIt<AppConstants>().localeEn,
           if (appState.userId.isNotEmpty) "user-id": appState.userId,
           if (appState.accessToken.isEmpty)
             "auth-key-file": appState.authKeyFile
@@ -267,12 +267,12 @@ final class APIController {
     late ErrorModel error;
     final responseData = response.data;
     String? session = response.headers['set-cookie']?.firstWhere(
-      (element) => element.startsWith(AppConstants.sessionId),
+      (element) => element.startsWith(getIt<AppConstants>().sessionId),
       orElse: () => '',
     );
     if (session != null && session.isNotEmpty) {
       await getIt<StorageManager>()
-          .saveData(AppConstants.sessionId, session.substring(0, 51));
+          .saveData(getIt<AppConstants>().sessionId, session.substring(0, 51));
       appState.setSessionId = session.substring(0, 51);
     }
     if ((responseData['error'] != null) &&

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 
 final class SVGOutlinedButton extends StatelessWidget {
   final Widget child;
@@ -8,14 +9,13 @@ final class SVGOutlinedButton extends StatelessWidget {
   final double width, height;
   final Color outlineColor;
 
-  const SVGOutlinedButton(
+  SVGOutlinedButton(
     this.child, {
     required this.onPressed,
     super.key,
     this.width = 50,
-    this.outlineColor = ColorConstants.primaryColor,
     this.height = 45,
-  });
+  }) : outlineColor = getIt<ColorConstants>().primaryColor;
 
   @override
   OutlinedButton build(BuildContext context) => OutlinedButton(
@@ -38,15 +38,14 @@ final class AppOutlinedButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color outlineColor;
 
-  const AppOutlinedButton(
+  AppOutlinedButton(
     this.child, {
     required this.onPressed,
     super.key,
-    this.outlineColor = ColorConstants.redColor,
     this.width = double.infinity,
     this.height = 35,
     this.borderRadius = 5,
-  });
+  }) : outlineColor = getIt<ColorConstants>().redColor;
 
   @override
   OutlinedButton build(BuildContext context) => OutlinedButton(
@@ -71,16 +70,15 @@ final class AppOutlinedIconButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color outlineColor;
 
-  const AppOutlinedIconButton({
+  AppOutlinedIconButton({
     required this.child,
     required this.icon,
     required this.onPressed,
     super.key,
-    this.outlineColor = ColorConstants.redColor,
     this.width = 50,
     this.height = 35,
     this.borderRadius = 50,
-  });
+  }) : outlineColor = getIt<ColorConstants>().redColor;
 
   @override
   OutlinedButton build(BuildContext context) => OutlinedButton.icon(

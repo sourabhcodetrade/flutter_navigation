@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 
 final class ChangeActivityButton extends StatelessWidget {
   final IconData icon;
@@ -24,7 +25,7 @@ final class ChangeActivityButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: ColorConstants.greyColor,
+              color: getIt<ColorConstants>().greyColor,
               size: 12,
             ),
             const SizedBox(
@@ -32,8 +33,8 @@ final class ChangeActivityButton extends StatelessWidget {
             ),
             Text(
               title,
-              style: const TextStyle(
-                  color: ColorConstants.greyColor, fontSize: 12),
+              style: TextStyle(
+                  color: getIt<ColorConstants>().greyColor, fontSize: 12),
             ),
           ],
         ),

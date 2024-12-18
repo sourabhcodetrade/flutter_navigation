@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 
 final class AppChipButton extends StatelessWidget {
   final Widget child;
@@ -8,16 +9,15 @@ final class AppChipButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor, foregroundColor;
 
-  const AppChipButton(
+  AppChipButton(
     this.child, {
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
-    this.foregroundColor = ColorConstants.whiteColor,
     this.width = double.infinity,
     this.height = 35,
     this.borderRadius = 5,
-  });
+  })  : backgroundColor = getIt<ColorConstants>().primaryColor,
+        foregroundColor = getIt<ColorConstants>().whiteColor;
 
   @override
   ElevatedButton build(BuildContext context) => ElevatedButton(
@@ -43,16 +43,15 @@ final class AppChipIconButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor;
 
-  const AppChipIconButton({
+  AppChipIconButton({
     required this.child,
     required this.icon,
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
     this.width = 50,
     this.height = 35,
     this.borderRadius = 50,
-  });
+  }) : backgroundColor = getIt<ColorConstants>().primaryColor;
 
   @override
   ElevatedButton build(BuildContext context) => ElevatedButton.icon(
@@ -77,16 +76,15 @@ final class AppChipOutlinedButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor, foregroundColor;
 
-  const AppChipOutlinedButton(
+  AppChipOutlinedButton(
     this.child, {
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.whiteColor,
-    this.foregroundColor = ColorConstants.primaryColor,
     this.width = double.infinity,
     this.height = 35,
     this.borderRadius = 5,
-  });
+  })  : backgroundColor = getIt<ColorConstants>().whiteColor,
+        foregroundColor = getIt<ColorConstants>().primaryColor;
 
   @override
   OutlinedButton build(BuildContext context) => OutlinedButton(
@@ -112,16 +110,15 @@ final class AppChipOutlinedIconButton extends StatelessWidget {
   final double width, height, borderRadius;
   final Color backgroundColor;
 
-  const AppChipOutlinedIconButton({
+  AppChipOutlinedIconButton({
     required this.child,
     required this.icon,
     required this.onPressed,
     super.key,
-    this.backgroundColor = ColorConstants.primaryColor,
     this.width = 50,
     this.height = 35,
     this.borderRadius = 50,
-  });
+  }) : backgroundColor = getIt<ColorConstants>().primaryColor;
 
   @override
   OutlinedButton build(BuildContext context) => OutlinedButton.icon(

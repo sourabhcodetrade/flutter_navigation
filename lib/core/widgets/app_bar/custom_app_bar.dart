@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_setup/extension/navigation_extension.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 import '../../../utils/services/app_state.dart';
 
 final class CustomAppBar extends StatelessWidget
@@ -28,10 +29,10 @@ final class CustomAppBar extends StatelessWidget
         leadingWidth: leadingWidth,
         title: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w800,
-            color: ColorConstants.primaryColor,
+            color: getIt<ColorConstants>().primaryColor,
             fontFamily: "HelveticaNeueLTArabic",
           ),
         ),

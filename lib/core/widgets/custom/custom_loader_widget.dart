@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 import '../dialog/spin_kit/spin_kit_fading_circle.dart';
 
 final class CenterLoader extends StatelessWidget {
@@ -26,7 +27,7 @@ final class CenterLoader extends StatelessWidget {
 
 final class SpinKitLoader extends StatelessWidget {
   final Color color;
-  const SpinKitLoader({super.key, this.color = ColorConstants.primaryColor});
+  SpinKitLoader({super.key}) : color = getIt<ColorConstants>().primaryColor;
 
   @override
   Widget build(BuildContext context) => SpinKitFadingCircle(color: color);
@@ -36,11 +37,10 @@ final class SpinKitLoaderWithToolTip extends StatelessWidget {
   final Color color;
   final String toolTip;
 
-  const SpinKitLoaderWithToolTip({
+  SpinKitLoaderWithToolTip({
     required this.toolTip,
     super.key,
-    this.color = ColorConstants.primaryColor,
-  });
+  }) : color = getIt<ColorConstants>().primaryColor;
 
   @override
   Row build(BuildContext context) => Row(
@@ -65,8 +65,8 @@ final class BackgroundFadingSpinKitLoader extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

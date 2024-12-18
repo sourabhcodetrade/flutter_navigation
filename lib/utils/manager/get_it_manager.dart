@@ -1,6 +1,9 @@
-import 'package:flutter_setup/utils/services/package_services.dart';
 import 'package:get_it/get_it.dart';
 
+import '../constants/apis.dart';
+import '../constants/app_constants.dart';
+import '../constants/color_constants.dart';
+import '../services/package_services.dart';
 import 'api_controller.dart';
 import 'storage_manager.dart';
 
@@ -10,4 +13,7 @@ Future<void> initializeGetItDependencies() async {
   getIt.registerSingleton<APIController>(APIController());
   getIt.registerSingleton<StorageManager>(StorageManager());
   getIt.registerSingleton<PackageServices>(PackageServices());
+  getIt.registerSingleton<ColorConstants>(ColorConstants());
+  getIt.registerSingleton<AppConstants>(AppConstants());
+  getIt.registerSingleton<APIS>(APIS());
 }

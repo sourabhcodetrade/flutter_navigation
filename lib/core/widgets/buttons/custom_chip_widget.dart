@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/color_constants.dart';
+import '../../../utils/manager/get_it_manager.dart';
 
 class CustomChipWidget extends StatelessWidget {
   final String text;
@@ -25,8 +26,8 @@ class CustomChipWidget extends StatelessWidget {
             const EdgeInsetsDirectional.symmetric(horizontal: 10, vertical: 3),
         margin: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: ColorConstants.whiteColor,
-          border: Border.all(color: ColorConstants.primaryColor),
+          color: getIt<ColorConstants>().whiteColor,
+          border: Border.all(color: getIt<ColorConstants>().primaryColor),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -39,7 +40,7 @@ class CustomChipWidget extends StatelessWidget {
                 maxLines: 3,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       fontSize: 16,
-                      color: ColorConstants.primaryColor,
+                      color: getIt<ColorConstants>().primaryColor,
                     ),
               ),
             ),
@@ -49,7 +50,7 @@ class CustomChipWidget extends StatelessWidget {
                 onTap: onDeleteTap,
                 child: Icon(
                   iconData,
-                  color: ColorConstants.primaryColor,
+                  color: getIt<ColorConstants>().primaryColor,
                 ),
               )
           ],

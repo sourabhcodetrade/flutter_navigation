@@ -126,8 +126,9 @@ final class AppState {
   /// Method to set initial Values
   Future<void> setInitialValues() async {
     _timeZone = await FlutterTimezone.getLocalTimezone();
-    _sessionId =
-        (await getIt<StorageManager>().getData(AppConstants.sessionId) ?? '');
+    _sessionId = (await getIt<StorageManager>()
+            .getData(getIt<AppConstants>().sessionId) ??
+        '');
     debugPrint('Current Env is "${AppConfig.instance.currentEnv.name}"');
     await _setDeviceId();
     await _setPackageInfo();
@@ -154,11 +155,11 @@ final class AppState {
     _clearValues();
     final storageManager = getIt<StorageManager>();
     final bool isRememberMe =
-        await storageManager.getBoolData(AppConstants.isRememberMe);
+        await storageManager.getBoolData(getIt<AppConstants>().isRememberMe);
     final String email =
-        await storageManager.getData(AppConstants.emailId) ?? '';
+        await storageManager.getData(getIt<AppConstants>().emailId) ?? '';
     final String password =
-        await storageManager.getData(AppConstants.password) ?? '';
+        await storageManager.getData(getIt<AppConstants>().password) ?? '';
     try {
       //TODO: Uncomment this to use fcm token
       // await FirebaseMessaging.instance.deleteToken();
@@ -170,11 +171,13 @@ final class AppState {
       _setFCMToken(),
       _setAPNSToken(),
       _setVOIPToken(),
-      if (isRememberMe) storageManager.saveData(AppConstants.emailId, email),
       if (isRememberMe)
-        storageManager.saveData(AppConstants.password, password),
+        storageManager.saveData(getIt<AppConstants>().emailId, email),
       if (isRememberMe)
-        storageManager.saveBoolData(AppConstants.isRememberMe, isRememberMe),
+        storageManager.saveData(getIt<AppConstants>().password, password),
+      if (isRememberMe)
+        storageManager.saveBoolData(
+            getIt<AppConstants>().isRememberMe, isRememberMe),
     ]);
   }
 

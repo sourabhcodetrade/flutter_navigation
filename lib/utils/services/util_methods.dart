@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/app_constants.dart';
+import '../manager/get_it_manager.dart';
 
 final class UtilMethods {
   static final UtilMethods instance = UtilMethods._();
@@ -78,7 +79,7 @@ final class UtilMethods {
   /// Method to parse String value from Map fromJson
   String stringValueParser(
     dynamic value, {
-    final String placeHolder = AppConstants.stringPlaceHolder,
+    required final String placeHolder,
   }) =>
       (value == false || value == null || value == "")
           ? placeHolder
@@ -96,7 +97,7 @@ final class UtilMethods {
 
   /// Method to parse placeholder("-") to empty string
   String placeholderParser(dynamic value) =>
-      (value == AppConstants.stringPlaceHolder)
+      (value == getIt<AppConstants>().stringPlaceHolder)
           ? ""
           : (value is String)
               ? value
@@ -104,7 +105,7 @@ final class UtilMethods {
 
   /// Method to parse placeholder("-") to bool value
   dynamic placeholderValueParser(dynamic value) =>
-      (value == AppConstants.stringPlaceHolder)
+      (value == getIt<AppConstants>().stringPlaceHolder)
           ? false
           : (value is String)
               ? value
@@ -259,17 +260,6 @@ final class UtilMethods {
     }
   }
 
-  /// The function uses a switch statement to check the value against multiple cases.
-  /// If the value matches any of the cases null, 0, '' (empty string),
-  /// AppConstants.stringPlaceHolder, or [] (empty list), then it returns false.
-  /// Otherwise, it returns the original value.
-  dynamic paramValueParser(dynamic value) {
-    return switch (value) {
-      null || 0 || '' || AppConstants.stringPlaceHolder || [] => false,
-      _ => value
-    };
-  }
-
   String doubleToTimeValueParser(dynamic value) {
     if (value is double) {
       String hour = value.toInt().toString();
@@ -279,7 +269,7 @@ final class UtilMethods {
       String time = '$hour:$minute';
       return time;
     } else {
-      return AppConstants.stringPlaceHolder;
+      return getIt<AppConstants>().stringPlaceHolder;
     }
   }
 
