@@ -12,12 +12,6 @@ import '../manager/storage_manager.dart';
 final AppState appState = AppState();
 
 final class AppState {
-  static final AppState instance = AppState._();
-
-  factory AppState() => instance;
-
-  AppState._();
-
   final Completer<void> appInitializationCompleter = Completer<void>();
   late Size _screenSize;
   final String _appName = "نهتم";

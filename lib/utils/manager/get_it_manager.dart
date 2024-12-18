@@ -1,3 +1,4 @@
+import 'package:flutter_setup/utils/services/app_state.dart';
 import 'package:get_it/get_it.dart';
 
 import '../constants/apis.dart';
@@ -11,6 +12,7 @@ GetIt getIt = GetIt.instance;
 
 Future<void> initializeGetItDependencies() async {
   getIt.registerSingleton<APIController>(APIController());
+  getIt.registerSingleton<AppState>(AppState());
   getIt.registerSingleton<StorageManager>(StorageManager());
   getIt.registerSingleton<PackageServices>(PackageServices());
   getIt.registerSingleton<ColorConstants>(ColorConstants());
