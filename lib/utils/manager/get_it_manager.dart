@@ -1,4 +1,5 @@
 import 'package:flutter_setup/utils/services/app_state.dart';
+import 'package:flutter_setup/utils/services/custom_theme.dart';
 import 'package:get_it/get_it.dart';
 
 import '../constants/apis.dart';
@@ -11,6 +12,7 @@ import 'storage_manager.dart';
 GetIt getIt = GetIt.instance;
 
 Future<void> initializeGetItDependencies() async {
+  getIt.registerSingleton<CustomTheme>(CustomTheme());
   getIt.registerSingleton<APIController>(APIController());
   getIt.registerSingleton<AppState>(AppState());
   getIt.registerSingleton<StorageManager>(StorageManager());
