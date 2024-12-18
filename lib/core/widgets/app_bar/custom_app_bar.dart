@@ -52,7 +52,7 @@ class AppBackButton extends StatelessWidget {
   IconButton build(BuildContext context) => IconButton(
         onPressed: context.pop,
         icon: ValueListenableBuilder<bool>(
-          valueListenable: appState.isArabic,
+          valueListenable: getIt<AppState>().isArabic,
           builder: (context, value, child) => Transform.rotate(
             angle: value ? math.pi : 0,
             child: const Icon(Icons.arrow_back_ios_new_rounded),

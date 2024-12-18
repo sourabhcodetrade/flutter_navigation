@@ -61,7 +61,7 @@ final class CustomDialog {
     } catch (e) {
       debugPrint("Error found in _showCustomDialog => $e");
     }
-    await appState.clearAllValues();
+    await getIt<AppState>().clearAllValues();
     await Future.delayed(const Duration(milliseconds: 300));
     context.pushNamedAndRemoveUntil(RouteName.loginScreen);
   }

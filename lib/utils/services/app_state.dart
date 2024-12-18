@@ -9,8 +9,6 @@ import '../constants/app_constants.dart';
 import '../manager/get_it_manager.dart';
 import '../manager/storage_manager.dart';
 
-final AppState appState = AppState();
-
 final class AppState {
   final Completer<void> appInitializationCompleter = Completer<void>();
   late Size _screenSize;

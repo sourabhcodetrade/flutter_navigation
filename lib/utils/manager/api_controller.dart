@@ -77,13 +77,14 @@ final class APIController {
     final Map<String, dynamic> params = {"params": param};
     try {
       final Map<String, dynamic> headerOptions = {
-        'Cookie': appState.sessionId,
-        'tz': appState.timeZone,
-        if (appState.userId.isNotEmpty) "user-id": appState.userId,
-        if (appState.accessToken.isEmpty)
-          "auth-key-file": appState.authKeyFile
+        'Cookie': getIt<AppState>().sessionId,
+        'tz': getIt<AppState>().timeZone,
+        if (getIt<AppState>().userId.isNotEmpty)
+          "user-id": getIt<AppState>().userId,
+        if (getIt<AppState>().accessToken.isEmpty)
+          "auth-key-file": getIt<AppState>().authKeyFile
         else
-          "access-token": appState.accessToken,
+          "access-token": getIt<AppState>().accessToken,
       };
       if (method == APIMethod.get) {
         response = await _dio.get(
@@ -193,16 +194,17 @@ final class APIController {
         url,
         data: formData,
         options: Options(headers: {
-          'Cookie': appState.sessionId,
-          'tz': appState.timeZone,
-          'Accept-Language': appState.isArabic.value
+          'Cookie': getIt<AppState>().sessionId,
+          'tz': getIt<AppState>().timeZone,
+          'Accept-Language': getIt<AppState>().isArabic.value
               ? getIt<AppConstants>().localeAr
               : getIt<AppConstants>().localeEn,
-          if (appState.userId.isNotEmpty) "user-id": appState.userId,
-          if (appState.accessToken.isEmpty)
-            "auth-key-file": appState.authKeyFile
+          if (getIt<AppState>().userId.isNotEmpty)
+            "user-id": getIt<AppState>().userId,
+          if (getIt<AppState>().accessToken.isEmpty)
+            "auth-key-file": getIt<AppState>().authKeyFile
           else
-            "access-token": appState.accessToken,
+            "access-token": getIt<AppState>().accessToken,
         }),
       );
       if (!isResponseHasModel) {
@@ -273,7 +275,7 @@ final class APIController {
     if (session != null && session.isNotEmpty) {
       await getIt<StorageManager>()
           .saveData(getIt<AppConstants>().sessionId, session.substring(0, 51));
-      appState.setSessionId = session.substring(0, 51);
+      getIt<AppState>().setSessionId = session.substring(0, 51);
     }
     if ((responseData['error'] != null) &&
         (responseData['error']['code'] == 100)) {
@@ -317,7 +319,7 @@ final class APIController {
               responseData['result']['result'],
               null,
               responseData['result']['status']['success'],
-              message: appState.isArabic.value
+              message: getIt<AppState>().isArabic.value
                   ? (responseData['result']['status']['error_message_ar'] ??
                       NavigationManager.navigatorKey.currentContext!
                           .localization.somethingWentWrong)
@@ -330,7 +332,7 @@ final class APIController {
               ErrorModel(
                 NavigationManager
                     .navigatorKey.currentContext!.localization.error,
-                appState.isArabic.value
+                getIt<AppState>().isArabic.value
                     ? (responseData['result']['status']['error_message_ar'] ??
                         NavigationManager.navigatorKey.currentContext!
                             .localization.somethingWentWrong)
@@ -340,7 +342,7 @@ final class APIController {
                 responseData['result']['status']['error_code'],
               ),
               responseData['result']['status']['success'],
-              message: appState.isArabic.value
+              message: getIt<AppState>().isArabic.value
                   ? (responseData['result']['status']['error_message_ar'] ??
                       NavigationManager.navigatorKey.currentContext!
                           .localization.somethingWentWrong)
@@ -371,7 +373,7 @@ final class APIController {
       if (response.data.isNotEmpty) {
         error = ErrorModel(
           NavigationManager.navigatorKey.currentContext!.localization.error,
-          appState.isArabic.value
+          getIt<AppState>().isArabic.value
               ? (responseData['result']['status']['error_message_ar'] ??
                   NavigationManager.navigatorKey.currentContext!.localization
                       .somethingWentWrong)
