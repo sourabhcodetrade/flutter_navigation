@@ -45,6 +45,7 @@ dependencies:
   package_info_plus: ^8.1.2
   device_info_plus: ^11.2.0
   gap: ^3.0.1
+  enum_to_string: ^2.0.1
 
 
 dev_dependencies:

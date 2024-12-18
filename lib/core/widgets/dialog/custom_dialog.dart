@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_setup/extension/localization_extension.dart';
 import 'package:flutter_setup/extension/navigation_extension.dart';
+import 'package:flutter_setup/utils/constants/enums/enum_route_name.dart';
 import 'package:gap/gap.dart';
 import '../../../utils/constants/apis.dart';
 import '../../../utils/constants/color_constants.dart';
@@ -62,7 +63,7 @@ final class CustomDialog {
     }
     await appState.clearAllValues();
     await Future.delayed(const Duration(milliseconds: 300));
-    context.pushNamedAndRemoveUntil('');
+    context.pushNamedAndRemoveUntil(RouteName.loginScreen);
   }
 
   /// Method to show Logout Widget

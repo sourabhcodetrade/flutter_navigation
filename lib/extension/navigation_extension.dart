@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_setup/utils/constants/enums/enum_route_name.dart';
 
 extension NavigationExtension on BuildContext {
   Future<T?> pushNamed<T extends Object?>(
-    String routeName, {
+    RouteName routeName, {
     final bool withNavBar = true,
     Object? args,
   }) =>
       Navigator.of(this, rootNavigator: !withNavBar)
-          .pushNamed<T>(routeName, arguments: args);
+          .pushNamed<T>(routeName.name, arguments: args);
 
-  Future<T?> pushNamedAndRemoveUntil<T extends Object?>(String routeName,
+  Future<T?> pushNamedAndRemoveUntil<T extends Object?>(RouteName routeName,
       {Object? args}) {
     return Navigator.of(this, rootNavigator: true).pushNamedAndRemoveUntil<T>(
-      routeName,
+      routeName.name,
       (route) => false,
       arguments: args,
     );
   }
 
   Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
-    String routeName, {
+    RouteName routeName, {
     TO? result,
     final bool withNavBar = true,
     Object? args,
   }) =>
       Navigator.of(this, rootNavigator: !withNavBar)
-          .pushReplacementNamed<T?, TO>(routeName,
+          .pushReplacementNamed<T?, TO>(routeName.name,
               arguments: args, result: result);
 
   void pop<T extends Object?>({T? args, bool withNavBar = true}) =>
