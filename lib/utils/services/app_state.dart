@@ -69,7 +69,7 @@ final class AppState {
     _sessionId = (await getIt<StorageManager>()
             .getData(getIt<AppConstants>().sessionId) ??
         '');
-    debugPrint('Current Env is "${AppConfig.instance.currentEnv.name}"');
+    debugPrint('Current Env is "${AppConfig().currentEnv.name}"');
     await Future.wait([
       _setDeviceId(),
       _setPackageInfo(),

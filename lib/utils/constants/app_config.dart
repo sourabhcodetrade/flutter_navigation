@@ -1,9 +1,9 @@
 enum Environment { dev, stage, preProd, prod, local }
 
 final class AppConfig {
-  static final AppConfig instance = AppConfig._();
+  static final AppConfig _i = AppConfig._();
 
-  factory AppConfig() => instance;
+  factory AppConfig() => _i;
 
   AppConfig._();
 

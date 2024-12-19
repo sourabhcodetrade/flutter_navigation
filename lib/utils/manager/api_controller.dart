@@ -52,7 +52,7 @@ final class APIController {
 
   void prepareRequest() {
     BaseOptions dioOptions = BaseOptions(
-      baseUrl: AppConfig.instance.apiBaseUrl,
+      baseUrl: AppConfig().apiBaseUrl,
       responseType: ResponseType.json,
       headers: {
         'Content-Type': 'application/json',
