@@ -1,3 +1,4 @@
+import 'package:flutter_setup/utils/manager/local_notification_manager.dart';
 import 'package:flutter_setup/utils/services/app_state.dart';
 import 'package:flutter_setup/utils/services/custom_theme.dart';
 import 'package:flutter_setup/utils/services/firebase_services.dart';
@@ -14,8 +15,9 @@ GetIt getIt = GetIt.instance;
 
 Future<void> initializeGetItDependencies() async {
   getIt.registerSingleton<FirebaseServices>(FirebaseServices());
-  getIt.registerSingleton<CustomTheme>(CustomTheme());
+  getIt.registerSingleton<LocalNotificationManager>(LocalNotificationManager());
   getIt.registerSingleton<APIController>(APIController());
+  getIt.registerSingleton<CustomTheme>(CustomTheme());
   getIt.registerSingleton<AppState>(AppState());
   getIt.registerSingleton<StorageManager>(StorageManager());
   getIt.registerSingleton<PackageServices>(PackageServices());

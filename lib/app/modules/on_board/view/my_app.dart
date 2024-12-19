@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,6 +9,7 @@ import 'package:flutter_setup/utils/services/custom_theme.dart';
 import 'package:flutter_setup/utils/services/firebase_services.dart';
 
 import '../../../../utils/constants/app_constants.dart';
+import '../../../../utils/manager/local_notification_manager.dart';
 import '../../../../utils/manager/navigation_manager.dart';
 import '../../../../utils/manager/storage_manager.dart';
 
@@ -25,7 +24,7 @@ Future<void> _onBackgroundMessage(RemoteMessage remoteMessage) async {
   final userId =
       await getIt<StorageManager>().getIntData(getIt<AppConstants>().userId);
   if (userId == null) return;
-  //TODO: Notification logic
+  getIt<LocalNotificationManager>().displayMessage(remoteMessage);
 }
 
 final class MyApp extends StatefulWidget {
@@ -75,7 +74,15 @@ extension _HelperMethod on _MyAppState {
                 .listenerFunction(remoteMessage))) {
           return;
         }
-        //TODO: Notification logic
+        if (!mounted && NavigationManager.navigatorKey.currentContext == null) {
+          return;
+        }
+        if (!(getIt<LocalNotificationManager>().isInitialized)) {
+          await getIt<LocalNotificationManager>().initialize(
+              NavigationManager.navigatorKey.currentContext ?? context);
+        }
+
+        getIt<LocalNotificationManager>().displayMessage(remoteMessage);
         newMessageId = remoteMessage.messageId!;
       },
     );
@@ -83,17 +90,35 @@ extension _HelperMethod on _MyAppState {
     getIt<FirebaseServices>().getInitialMessage(
       (remoteMessage) async {
         await getIt<AppState>().appInitializationCompleter.future;
-        if (getIt<AppState>().userId.isEmpty) return;
-        //TODO: Notification logic
+        if (getIt<AppState>().userId.isEmpty ||
+            !mounted && NavigationManager.navigatorKey.currentContext == null) {
+          return;
+        }
+        if (!(getIt<LocalNotificationManager>().isInitialized)) {
+          await getIt<LocalNotificationManager>().initialize(
+              NavigationManager.navigatorKey.currentContext ?? context);
+        }
+        getIt<LocalNotificationManager>().navigate(
+            NavigationManager.navigatorKey.currentContext ?? context,
+            remoteMessage.data);
       },
     );
 
     getIt<FirebaseServices>().onBackgroundMessageListener(_onBackgroundMessage);
 
     getIt<FirebaseServices>().onMessageOpenedAppHandler(
-      (remoteMessage) {
-        if (getIt<AppState>().userId.isEmpty) return;
-        //TODO: Notification logic
+      (remoteMessage) async {
+        if (getIt<AppState>().userId.isEmpty ||
+            !mounted && NavigationManager.navigatorKey.currentContext == null) {
+          return;
+        }
+        if (!(getIt<LocalNotificationManager>().isInitialized)) {
+          await getIt<LocalNotificationManager>().initialize(
+              NavigationManager.navigatorKey.currentContext ?? context);
+        }
+        getIt<LocalNotificationManager>().navigate(
+            NavigationManager.navigatorKey.currentContext ?? context,
+            remoteMessage.data);
       },
     );
   }
