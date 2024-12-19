@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_setup/utils/constants/app_config.dart';
 import 'package:flutter_setup/utils/manager/get_it_manager.dart';
@@ -21,10 +22,13 @@ void mainDelegate() async {
     if (!AppConfig.instance.isFlavourInitialized) {
       AppConfig.instance.setEnvironment(AppConfig.instance.currentEnv);
     }
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(
       const MyApp(),
     );
-  }, (error, stack) {});
+  }, (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
+  });
 }
 
 class MyHttpOverrides extends HttpOverrides {
