@@ -14,7 +14,7 @@ import 'storage_manager.dart';
 GetIt getIt = GetIt.instance;
 
 Future<void> initializeGetItDependencies() async {
-  getIt.registerSingleton<FirebaseServices>(FirebaseServices());
+  // getIt.registerSingleton<FirebaseServices>(FirebaseServices());
   getIt.registerSingleton<LocalNotificationManager>(LocalNotificationManager());
   getIt.registerSingleton<APIController>(APIController());
   getIt.registerSingleton<CustomTheme>(CustomTheme());

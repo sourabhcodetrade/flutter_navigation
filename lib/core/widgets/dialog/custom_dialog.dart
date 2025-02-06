@@ -63,7 +63,7 @@ final class CustomDialog {
     }
     await getIt<AppState>().clearAllValues();
     await Future.delayed(const Duration(milliseconds: 300));
-    context.pushNamedAndRemoveUntil(RouteName.loginScreen);
+    context.pushNamedAndRemoveUntil(RootRouteName.loginScreen);
   }
 
   /// Method to show Logout Widget

@@ -23,12 +23,12 @@ void mainDelegate() async {
     if (!AppConfig().isFlavourInitialized) {
       AppConfig().setEnvironment(AppConfig().currentEnv);
     }
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(
       const MyApp(),
     );
   }, (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack);
+    // FirebaseCrashlytics.instance.recordError(error, stack);
   });
 }
 

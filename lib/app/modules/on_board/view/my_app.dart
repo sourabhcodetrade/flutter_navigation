@@ -39,7 +39,7 @@ final class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    _initializeFirebase();
+    // _initializeFirebase();
     super.initState();
   }
 
@@ -56,10 +56,14 @@ final class _MyAppState extends State<MyApp> {
       supportedLocales: [
         Locale('en'), // English
       ],
+      navigatorKey: NavigationManager.rootNavigatorKey,
+      home: Navigator(
+        key: NavigationManager.navigatorKey,
+        initialRoute: RootRouteName.splashScreen.routeName,
+        onGenerateRoute: NavigationManager.onRootGenerateRoute,
+      ),
       themeMode: ThemeMode.light,
       theme: getIt<CustomTheme>().lightTheme(),
-      initialRoute: RouteName.splashScreen.name,
-      onGenerateRoute: NavigationManager.onGenerateRoute,
     );
   }
 }
