@@ -51,6 +51,7 @@ dependencies:
   firebase_crashlytics: ^4.2.0
   flutter_local_notifications: ^18.0.1
   flutter_dotenv: ^5.2.1
+  navigation_history_observer: ^1.1.1
 
 
 dev_dependencies:

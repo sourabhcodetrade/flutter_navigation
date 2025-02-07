@@ -14,18 +14,25 @@ final class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),
-      () => context.pushNamed(RootRouteName.paymentRouter),
-    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow,
-      child: Text("Home"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.yellow,
+          child: ElevatedButton(
+              onPressed: () {
+                context.pushNamed(RootRouteName.paymentRouter);
+              },
+              child: Text("Payment Router")),
+        ),
+      ),
     );
   }
 }

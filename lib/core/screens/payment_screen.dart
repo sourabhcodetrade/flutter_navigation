@@ -21,7 +21,8 @@ class NavigationRouterWidget extends StatelessWidget {
   final Routes initialRoute;
   final Route<dynamic> Function(RouteSettings routeSettings) onGenerateRoute;
   final VoidCallback callback;
-  const NavigationRouterWidget({
+  late final NavigatorState navigatorState;
+  NavigationRouterWidget({
     super.key,
     required this.initialRoute,
     required this.onGenerateRoute,
@@ -30,9 +31,23 @@ class NavigationRouterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navigator(
-      onGenerateRoute: onGenerateRoute,
-      initialRoute: initialRoute.routeName,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          return;
+        }
+        navigatorState.canPop() ? navigatorState.pop() : context.pop();
+      },
+      child: Navigator(
+        onGenerateInitialRoutes: (navigator, initialRoute) {
+          navigatorState = navigator;
+          return Navigator.defaultGenerateInitialRoutes(
+              navigator, initialRoute);
+        },
+        onGenerateRoute: onGenerateRoute,
+        initialRoute: initialRoute.routeName,
+      ),
     );
   }
 }
@@ -47,18 +62,25 @@ final class PaymentScreen1 extends StatefulWidget {
 class _PaymentScreen1State extends State<PaymentScreen1> {
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),
-      () => context.pushNamed(PaymentRouteName.payment2),
-    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueAccent,
-      child: Text("P1"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Payment 1"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.yellow,
+          child: ElevatedButton(
+              onPressed: () {
+                context.pushNamed(PaymentRouteName.payment2);
+              },
+              child: Text("Payment 2")),
+        ),
+      ),
     );
   }
 }
@@ -73,18 +95,25 @@ final class PaymentScreen2 extends StatefulWidget {
 class _PaymentScreen2State extends State<PaymentScreen2> {
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),
-      () => context.pushNamed(PaymentRouteName.payment3),
-    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.deepPurple,
-      child: Text("P2"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Payment 2"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.tealAccent,
+          child: ElevatedButton(
+              onPressed: () {
+                context.pushNamed(PaymentRouteName.payment3);
+              },
+              child: Text("Payment 3")),
+        ),
+      ),
     );
   }
 }
@@ -99,18 +128,25 @@ final class PaymentScreen3 extends StatefulWidget {
 class _PaymentScreen3State extends State<PaymentScreen3> {
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),
-      () => context.pushNamed(PaymentRouteName.payment4),
-    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pink,
-      child: Text("P3"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Payment 3"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.yellow,
+          child: ElevatedButton(
+              onPressed: () {
+                context.pushNamed(PaymentRouteName.payment4);
+              },
+              child: Text("Payment 3")),
+        ),
+      ),
     );
   }
 }
@@ -125,18 +161,25 @@ final class PaymentScreen4 extends StatefulWidget {
 class _PaymentScreen4State extends State<PaymentScreen4> {
   @override
   void initState() {
-    Future.delayed(
-      Duration(seconds: 3),
-      () => NavigationManager.navigatorKey.currentContext!.pop(),
-    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.tealAccent,
-      child: Text("P4"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Payment 4"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.yellow,
+          child: ElevatedButton(
+              onPressed: () {
+                NavigationManager.rootNavigatorKey.currentContext!.pop();
+              },
+              child: Text("Home")),
+        ),
+      ),
     );
   }
 }

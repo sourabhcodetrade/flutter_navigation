@@ -50,8 +50,8 @@ final class NavigationManager {
     routeScreen = switch (routeName) {
       // ************** OnBoard module starts **************
       RootRouteName.splashScreen => Splash(),
-      RootRouteName.paymentRouter => PaymentRouter(),
       RootRouteName.home => Home(),
+      RootRouteName.paymentRouter => PaymentRouter(),
       // ************** OnBoard module ends **************
 
       _ => UnderDevelopmentScreen(showLeading: args['showLeading'] ?? true),

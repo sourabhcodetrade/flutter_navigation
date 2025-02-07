@@ -57,11 +57,13 @@ final class _MyAppState extends State<MyApp> {
         Locale('en'), // English
       ],
       navigatorKey: NavigationManager.rootNavigatorKey,
-      home: Navigator(
-        key: NavigationManager.navigatorKey,
-        initialRoute: RootRouteName.splashScreen.routeName,
-        onGenerateRoute: NavigationManager.onRootGenerateRoute,
-      ),
+      initialRoute: RootRouteName.splashScreen.routeName,
+      onGenerateRoute: NavigationManager.onRootGenerateRoute,
+      // home: Navigator(
+      //   key: NavigationManager.navigatorKey,
+      //   initialRoute: RootRouteName.splashScreen.routeName,
+      //   onGenerateRoute: NavigationManager.onRootGenerateRoute,
+      // ),
       themeMode: ThemeMode.light,
       theme: getIt<CustomTheme>().lightTheme(),
     );
