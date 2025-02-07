@@ -1,6 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_setup/custom_easy_loader.dart';
 import 'package:flutter_setup/utils/constants/enums/enum_route_name.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_setup/utils/manager/get_it_manager.dart';
@@ -59,6 +61,8 @@ final class _MyAppState extends State<MyApp> {
       navigatorKey: NavigationManager.rootNavigatorKey,
       initialRoute: RootRouteName.splashScreen.routeName,
       onGenerateRoute: NavigationManager.onRootGenerateRoute,
+      builder: (context, child) => CustomEasyLoader().init(context, child!),
+      // builder: EasyLoading.init(),
       // home: Navigator(
       //   key: NavigationManager.navigatorKey,
       //   initialRoute: RootRouteName.splashScreen.routeName,

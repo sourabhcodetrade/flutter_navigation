@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_setup/custom_easy_loader.dart';
 import 'package:flutter_setup/extension/navigation_extension.dart';
-import 'package:flutter_setup/utils/manager/navigation_manager.dart';
 
 import '../../utils/constants/enums/enum_route_name.dart';
 
@@ -22,6 +22,27 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          CustomEasyLoader().show();
+
+          // EasyLoading.show();
+          Future.delayed(
+            Duration(seconds: 1),
+            () {
+              context.pushNamed(RootRouteName.paymentRouter);
+              // EasyLoading.dismiss();
+            },
+          );
+          Future.delayed(
+            Duration(seconds: 4),
+            () {
+              CustomEasyLoader().dismiss();
+              // EasyLoading.dismiss();
+            },
+          );
+        },
       ),
       body: Center(
         child: Container(
